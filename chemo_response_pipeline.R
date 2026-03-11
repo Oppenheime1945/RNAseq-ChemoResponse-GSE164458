@@ -41,7 +41,7 @@ if(length(target_file) == 0) {
   tryCatch({
     getGEOSuppFiles("GSE164458", baseDir = data_dir)
   }, error = function(e) {
-    message("⚠️ Standard download failed. Trying Direct Download...")
+    message("Standard download failed. Trying Direct Download...")
     url <- "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE164nnn/GSE164458/suppl/GSE164458_BrighTNess_RNAseq_log2_Processed_ASTOR.txt.gz"
     dest_folder <- file.path(data_dir, "GSE164458")
     if(!dir.exists(dest_folder)) dir.create(dest_folder)
