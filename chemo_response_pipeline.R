@@ -47,9 +47,9 @@ if(length(target_file) == 0) {
     if(!dir.exists(dest_folder)) dir.create(dest_folder)
     download.file(url, destfile = file.path(dest_folder, "GSE164458_BrighTNess_RNAseq_log2_Processed_ASTOR.txt.gz"), mode = "wb")
   })
-  message("✅ Download Complete.")
+  message("Download Complete.")
 } else {
-  message("✅ Local data found. Skipping download.")
+  message("Local data found. Skipping download.")
 }
 
 # Load Data
@@ -68,7 +68,7 @@ message(">>> [MODULE 2] Cleaning and Aligning Data...")
 common_ids <- intersect(rownames(metadata_raw), colnames(count_data_raw))
 
 if(length(common_ids) == 0) {
-  message("⚠️ ID Mismatch. Aligning by column order...")
+  message("ID Mismatch. Aligning by column order...")
   min_samples <- min(ncol(count_data_raw), nrow(metadata_raw))
   count_data <- count_data_raw[, 1:min_samples]
   metadata   <- metadata_raw[1:min_samples, ]
@@ -94,7 +94,7 @@ mode(count_data) <- "numeric"
 metadata$PatientID <- factor(1:nrow(metadata))
 metadata$Timepoint <- factor(rep(c("Pre_Chemo", "Post_Chemo"), length.out = nrow(metadata)))
 
-message("✅ Data Aligned: ", ncol(count_data), " Samples Ready.")
+message("Data Aligned: ", ncol(count_data), " Samples Ready.")
 
 # --- MODULE 3: DIFFERENTIAL EXPRESSION (DESeq2) -------------------------------
 message(">>> [MODULE 3] Running Differential Expression (DESeq2)...")
@@ -116,7 +116,7 @@ res_df$Symbol <- rownames(res_df)
 gene_map <- bitr(res_df$Symbol, fromType="SYMBOL", toType="ENTREZID", OrgDb=org.Hs.eg.db)
 res_df <- merge(res_df, gene_map, by.x="Symbol", by.y="SYMBOL", all.x=TRUE)
 
-message("✅ Statistical Analysis Complete.")
+message("Statistical Analysis Complete.")
 
 # --- MODULE 4: VISUALIZATION --------------------------------------------------
 message(">>> [MODULE 4] Generating Publication Figures...")
