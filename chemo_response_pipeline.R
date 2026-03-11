@@ -36,7 +36,7 @@ if(!dir.exists(data_dir)) dir.create(data_dir)
 target_file <- list.files(file.path(data_dir, "GSE164458"), pattern = "Processed_ASTOR.txt.gz", full.names = TRUE)
 
 if(length(target_file) == 0) {
-  message("⬇️ Downloading Raw Counts from GEO (73 MB)...")
+  message("Downloading Raw Counts from GEO (73 MB)...")
   
   tryCatch({
     getGEOSuppFiles("GSE164458", baseDir = data_dir)
